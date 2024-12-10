@@ -1,0 +1,24 @@
+{
+  "name": "projeto-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sumpa.js",
+  "scripts": {
+    "start": "nodemon sumpa.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartimFlores/projeto-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MartimFlores/projeto-nodejs/issues"
+  },
+  "homepage": "https://github.com/MartimFlores/projeto-nodejs#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.7"
+  }
+}
