@@ -2,6 +2,8 @@ const express = require ('express');
 const app = express();
 const path = require('path');
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 }); 
@@ -22,6 +24,7 @@ app.get('/carros/:marca', (req, res) => {
 app.get('/users/:name/nacionalidade/:pais', (req, res) => {
     const pedido1 = req.params.name;
     const pedido2 = req.params.pais;
+
     res.send(`Este user chama-se ${pedido1} e é de ${pedido2}`);
 });
 
@@ -31,11 +34,30 @@ app.get('/search_users', (req, res) => {
     res.send(`O user com nome ${nome} e id ${id} não foi encontrado!`);
 });
 
+app.get('/livros', (req, res) => {
+
+    const livro = req.body;
+    console.log(livro)
+
+    res.send(`Foi feito um pedido do livro: ${livro.nome} , autor: ${livro.artista}, do ano: ${livro.ano}`);
+});
+
+
+app.get('/balance/:dinheiro', (req, res) =>{
+    const djiz = req.params.dinheiro ;
+    res.send(`O seu dinheiro é ${djiz}`);
+});
+
+app.post('/balance/', (req, res) =>{
+    const moneyBalance = req.body ;
+    res.send(`O seu dinheiro é ${moneyBalance.balance}`);
+});
+
 
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor a correr em https://localhost/:${PORT}`);
+    console.log(`Servidor a correr em http://localhost:${PORT}`);
 });
 
 /*  codigo para ddos
