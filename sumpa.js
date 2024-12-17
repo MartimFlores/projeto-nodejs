@@ -42,15 +42,41 @@ app.get('/livros', (req, res) => {
     res.send(`Foi feito um pedido do livro: ${livro.nome} , autor: ${livro.artista}, do ano: ${livro.ano}`);
 });
 
+let moneyBalance = null;
 
 app.get('/balance/:dinheiro', (req, res) =>{
     const djiz = req.params.dinheiro ;
     res.send(`O seu dinheiro é ${djiz}`);
 });
 
-app.post('/balance/', (req, res) =>{
-    const moneyBalance = req.body ;
-    res.send(`O seu dinheiro é ${moneyBalance.balance}`);
+app.post('/balance', (request, response) =>{
+     
+    if(moneyBalance==null){
+        moneyBalance = request.body.balance ;
+    response.sendStatus(200);
+}else{
+    response.sendStatus(400);
+}
+});
+
+app.put('/balance', (request, response) =>{
+     
+    if(moneyBalance!=null){
+        moneyBalance = request.body.balance ;
+    response.sendStatus(200);
+}else{
+    response.sendStatus(400);
+}
+});
+
+app.delete('/balance', (request, response) =>{
+     
+    if(moneyBalance!=null){
+        moneyBalance = null;
+    response.sendStatus(200);
+}else{
+    response.sendStatus(400);
+}
 });
 
 
