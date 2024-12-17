@@ -4,7 +4,7 @@
   "description": "",
   "main": "sumpa.js",
   "scripts": {
-    "start": "nodemon sumpa.js",
+    "start": "nodemon users.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
