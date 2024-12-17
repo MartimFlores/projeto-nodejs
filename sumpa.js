@@ -53,9 +53,9 @@ app.post('/balance', (request, response) =>{
      
     if(moneyBalance==null){
         moneyBalance = request.body.balance ;
-    response.sendStatus(200);
+    response.sendsend("Variavel criada com sucesso " + moneyBalance);
 }else{
-    response.sendStatus(400);
+    response.sendsend("Erro ao criar variavel " + moneyBalance);
 }
 });
 
@@ -63,9 +63,9 @@ app.put('/balance', (request, response) =>{
      
     if(moneyBalance!=null){
         moneyBalance = request.body.balance ;
-    response.sendStatus(200);
+    response.send("Variavel atualizada com sucesso " + moneyBalance);
 }else{
-    response.sendStatus(400);
+    response.send("Erro ao atualizar variavel " + moneyBalance);
 }
 });
 
@@ -73,9 +73,9 @@ app.delete('/balance', (request, response) =>{
      
     if(moneyBalance!=null){
         moneyBalance = null;
-    response.sendStatus(200);
+    response.send("A variavel foi apagada com sucesso " + moneyBalance);
 }else{
-    response.sendStatus(400);
+    response.send("Erro ao apagar variavel " + moneyBalance);
 }
 });
 
