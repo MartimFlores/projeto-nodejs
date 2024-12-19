@@ -1,13 +1,16 @@
 const express = require ('express');
 const app = express();
 const path = require('path');
-
 app.use(express.json());
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Servidor a correr em http://localhost:${PORT}`);
 });
+
+
+let moneyBalance=null;
 
 const users=[
     {
@@ -29,17 +32,17 @@ const users=[
 
 
 app.get('/users', (req, res) =>{
-    const pdidi = req.params.users[];
+    const pdidi = users;
     res.send(pdidi);
 }
 
 );
 
-app.post('/balance', (request, response) =>{
+app.post('/users', (request, response) =>{
      
     if(moneyBalance==null){
         moneyBalance = request.body.balance ;
-    response.sendsend("Variavel criada com sucesso " + moneyBalance);
+    response.send("Variavel criada com sucesso " + moneyBalance);
 }else{
     response.sendsend("Erro ao criar variavel " + moneyBalance);
 }
@@ -55,12 +58,19 @@ app.put('/balance', (request, response) =>{
 }
 });
 
-app.delete('/balance', (request, response) =>{
+app.delete('/users', (req, res) =>{
      
-    if(moneyBalance!=null){
-        moneyBalance = null;
-    response.send("A variavel foi apagada com sucesso " + moneyBalance);
-}else{
-    response.send("Erro ao apagar variavel " + moneyBalance);
-}
+   for (let i = 0; i < users.length; i++) {
+    const uti = req.body.id;
+    
+    if(users[i].id==uti){
+        users.splice(i,1);
+        res.sendStatus(200);
+        return;
+    }
+
+
+
+    
+   } res.sendStatus(400);
 });
