@@ -4,7 +4,7 @@
   "description": "",
   "main": "sumpa.js",
   "scripts": {
-    "start": "nodemon users.js",
+    "start": "nodemon sumpa.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/MartimFlores/projeto-nodejs#readme",
   "dependencies": {
     "express": "^4.21.2",
+    "mysql2": "^3.12.0",
     "nodemon": "^3.1.7"
   }
 }

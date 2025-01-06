@@ -1,8 +1,27 @@
 const express = require ('express');
 const app = express();
 const path = require('path');
+const mysql = require('mysql2');
 
 app.use(express.json())
+
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'psi_2',
+    port: 3306
+});
+
+connection.connect((err)=>{
+    if (err){
+        console.error('Erro ao conectar à base de dados:', err.message);
+    } else {
+        console.log('Conectado à base de dados MySQL!');
+    }
+});
+
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -77,6 +96,56 @@ app.delete('/balance', (request, response) =>{
 }else{
     response.send("Erro ao apagar variavel " + moneyBalance);
 }
+});
+
+
+app.get('/users', (req, res) =>{
+    const myQuery = `SELECT * FROM ${users}`
+    connection.query(myQuery, (err, results) => {
+        if (err){
+            return res.status(500).send('Erro ao buscar users: '+ err.message);
+        }
+        res.json(results);
+    });
+}
+
+);
+
+app.post('/users', (request, response) =>{
+     
+    if(moneyBalance==null){
+        moneyBalance = request.body.balance ;
+    response.send("Variavel criada com sucesso " + moneyBalance);
+}else{
+    response.sendsend("Erro ao criar variavel " + moneyBalance);
+}
+});
+
+app.put('/balance', (request, response) =>{
+     
+    if(moneyBalance!=null){
+        moneyBalance = request.body.balance ;
+    response.send("Variavel atualizada com sucesso " + moneyBalance);
+}else{
+    response.send("Erro ao atualizar variavel " + moneyBalance);
+}
+});
+
+app.delete('/users', (req, res) =>{
+     
+   for (let i = 0; i < users.length; i++) {
+    const uti = req.body.id;
+    
+    if(users[i].id==uti){
+        users.splice(i,1);
+        res.sendStatus(200);
+        return;
+    }
+
+
+
+    
+   } res.sendStatus(400);
 });
 
 
