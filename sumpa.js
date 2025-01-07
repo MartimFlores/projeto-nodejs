@@ -2,7 +2,7 @@ const express = require ('express');
 const app = express();
 const path = require('path');
 const mysql = require('mysql2');
-
+const users = "users";
 app.use(express.json())
 
 const connection = mysql.createConnection({
@@ -103,7 +103,7 @@ app.get('/users', (req, res) =>{
     const myQuery = `SELECT * FROM ${users}`
     connection.query(myQuery, (err, results) => {
         if (err){
-            return res.status(500).send('Erro ao buscar users: '+ err.message);
+            return results.status(500).send('Erro ao buscar users: '+ err.message);
         }
         res.json(results);
     });
@@ -112,13 +112,48 @@ app.get('/users', (req, res) =>{
 );
 
 app.post('/users', (request, response) =>{
-     
-    if(moneyBalance==null){
-        moneyBalance = request.body.balance ;
-    response.send("Variavel criada com sucesso " + moneyBalance);
-}else{
-    response.sendsend("Erro ao criar variavel " + moneyBalance);
-}
+    var id = 'NULL';
+    var first_name = request.body.first_name;
+    var last_name = request.body.last_name;
+    var email = request.body.email;
+
+    const myQuery2 = `INSERT INTO ${users} (id, first_name, last_name, email) VALUES (NULL, '${first_name}', '${last_name}', '${email}');`
+
+    connection.query(myQuery2, (err, results) => {
+        if (err){
+            return response.status(500).send('Erro ao buscar users: '+ err.message);
+        }
+        response.json(results);
+    });
+});
+
+app.put('/users/:id', (request, response) =>{
+    var id = request.params.id;
+    var first_name = request.body.first_name;
+    var last_name = request.body.last_name;
+    var email = request.body.email;
+
+    const myQuery2 = `UPDATE ${users} SET first_name='${first_name}', last_name='${last_name}', email='${email}' WHERE id=${id}`
+
+    connection.query(myQuery2, (err, results) => {
+        if (err){
+            return response.status(500).send('Erro ao buscar users: '+ err.message);
+        }
+        response.json(results);
+    });
+});
+
+app.delete('/users/:id', (request, response) =>{
+    var id = request.params.id;
+
+    const myQuery2 = `DELETE FROM ${users} WHERE id=${id}`
+
+    connection.query(myQuery2, (err, results) => {
+        if (err){
+            return response.status(500).send('Erro ao buscar users: '+ err.message);
+        }
+        response.json(results);
+    });
 });
 
 app.put('/balance', (request, response) =>{
