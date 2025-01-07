@@ -156,6 +156,19 @@ app.delete('/users/:id', (request, response) =>{
     });
 });
 
+app.get('/users/:first_name', (req, res) =>{
+    const nome = req.params.first_name;
+    const myQuery = `SELECT * FROM ${users} WHERE first_name='${nome}'`
+    connection.query(myQuery, (err, results) => {
+        if (err){
+            return res.status(500).send('Erro ao buscar users: '+ err.message);
+        }
+        res.json(results);
+    });
+}
+
+);
+
 app.put('/balance', (request, response) =>{
      
     if(moneyBalance!=null){
